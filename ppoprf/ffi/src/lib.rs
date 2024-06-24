@@ -72,7 +72,7 @@ pub unsafe extern "C" fn randomness_server_eval(
     // Unfortunately from_slice() copies the data here.
     let point = {
         let bytes = std::slice::from_raw_parts(input, ppoprf::COMPRESSED_POINT_LEN);
-        ppoprf::CompressedRistretto::from_slice(bytes)
+        ppoprf::Point(ppoprf::CompressedRistretto::from_slice(bytes))
     };
     // Evaluate the requested point.
     let result = server.eval(&point, md_index, verifiable);
